@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Diş Tedavi Oyunu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Diş Tedavi Oyunu</h1>
+  <div id="question"></div>
+  <div id="options"></div>
+  <div id="feedback"></div>
+  <button onclick="nextCase()">Sonraki Vaka</button>
+  <script src="script.js"></script>
+</body>
+</html>
