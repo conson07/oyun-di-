@@ -1,5 +1,6 @@
 body {
   font-family: Arial;
+  font-family: Arial, sans-serif;
   padding: 20px;
   max-width: 600px;
   margin: auto;
@@ -8,4 +9,9 @@ body {
 button {
   margin: 5px;
   padding: 10px 20px;
+}
+
+#feedback {
+  margin-top: 15px;
+  font-weight: bold;
 }
