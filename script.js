@@ -27,6 +27,8 @@ const cases = [
 
 const options = ["Dolgu", "Kanal Tedavisi", "Diş Çekimi"];
 let current = 0;
+let score = 0;
+let answered = false;
 
 function loadCase() {
   const c = cases[current];
@@ -40,6 +42,8 @@ function loadCase() {
     optionsDiv.appendChild(btn);
   const opts = document.getElementById("options");
   opts.innerHTML = "";
+  answered = false;
+  document.querySelector("button[onclick='nextCase()']").disabled = true;
   options.forEach(opt => {
     const b = document.createElement("button");
     b.innerText = opt;
@@ -54,13 +58,18 @@ function checkAnswer(selected, correct, explanation) {
   document.getElementById("feedback").innerText = feedback + " " + explanation;
 function selectAnswer(choice) {
   const c = cases[current];
-  const result = choice === c.correct ? "Doğru" : "Yanlış";
+  const correct = choice === c.correct;
+  if (correct) score++;
+  const result = correct ? "Doğru" : "Yanlış";
   document.getElementById("feedback").innerText = `${result}! ${c.explanation}`;
   // disable buttons after an answer
   Array.from(document.getElementById("options").children).forEach(btn => btn.disabled = true);
+  answered = true;
+  document.querySelector("button[onclick='nextCase()']").disabled = false;
 }
 
 function nextCase() {
+  if (!answered) return;
   current++;
   if (current < cases.length) {
     loadCase();
@@ -69,7 +78,10 @@ function nextCase() {
     document.getElementById("question").innerText = "Tüm vakalar tamamlandı";
     document.getElementById("options").innerHTML = "";
     document.getElementById("feedback").innerText = "";
+    document.getElementById("feedback").innerText = `Skorunuz: ${score}/${cases.length}`;
   }
 }
 
 window.onload = loadCase;
+// Start the first case when the script loads
+loadCase();
